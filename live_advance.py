@@ -2,20 +2,9 @@ import cortex
 from cortex import Cortex
 from pynput.keyboard import Key, Controller
 import json
-
 kb = Controller()
 
-"""
-
-
-"""
-your_app_client_id = 'YB8Sh8MD29t0AzT01LKA6zzUjgwFGGnCepXByfzG'
-your_app_client_secret = 'LBTM22NqGxBDAZRnEi0Qh3x4yL6IsPiDzohQ2nY1cJyTI372YlNDIGWPyEkYtZCrtpe1QNiEWyzCXiUb3EBebLccqykMad1B0L4CpNGPr6NVFgwYLUOodJpIYqLWMPFD'
-trained_profile_name = 'testprof'  # Please set a trained profile name here
-trained_cmd = 'push'
 threshold = 50
-
-
 class LiveAdvance():
     """
     A class to show mental command data at live mode of trained profile.
@@ -233,7 +222,7 @@ class LiveAdvance():
     def on_new_com_data(self, *args, **kwargs):
         """
         To handle mental command data emitted from Cortex
-        
+
         Returns
         -------
         data: dictionary
@@ -243,19 +232,19 @@ class LiveAdvance():
         print('mc data: {}'.format(data))
         with open("config.json", "r") as config_file:
             config = json.load(config_file)
-        keys = ['w','a','s','d']
+        keys = ['w', 'a', 's', 'd']
         push_key = keys[config["push"]]
         pull_key = keys[config["pull"]]
         left_key = keys[config["left"]]
         right_key = keys[config["right"]]
         if data['action'] == "push" and data['power'] >= threshold:
-            kb.press(push_key, 0.1)  # key and duration in seconds
+            kb.press(push_key)  # key and duration in seconds
         elif data['action'] == "pull" and data['power'] >= threshold:
-            kb.press(pull_key, 0.1)  # key and duration in seconds
+            kb.press(pull_key)  # key and duration in seconds
         elif data['action'] == "left" and data['power'] >= threshold:
-            kb.press(left_key, 0.1)  # key and duration in seconds
+            kb.press(left_key)  # key and duration in seconds
         elif data['action'] == "right" and data['power'] >= threshold:
-            kb.press(right_key, 0.1)  # key and duration in seconds
+            kb.press(right_key)  # key and duration in seconds
 
     def on_get_mc_active_action_done(self, *args, **kwargs):
         data = kwargs.get('data')
@@ -302,15 +291,22 @@ class LiveAdvance():
 #    {'action': 'pull', 'power': 0.55, 'time': 1647525819.1473}
 # 
 # -----------------------------------------------------------
+
+# def main():
 #
-def main():
-
-
-
-    # Init live advance
-    l = LiveAdvance(your_app_client_id, your_app_client_secret)
-
-    l.start(trained_profile_name)
-
-main()
-# -----------------------------------------------------------
+#     # Please fill your application clientId and clientSecret before running script
+#     your_app_client_id = 'JLuMZwsnMkvrEo5eGR7wwazyXRfjdBBg1KnGC5id'
+#     your_app_client_secret = 'f2tHNJAVA5O2eza6GkPX5DeZni8J7TW2tI3IuO6YFISdxGmGBtLLm2SvpMTz53TGLvPiZJMw45Mnljnjt1UCSc7r7FXvjcsUOGOB6DHJbg6GU06NtbLCqRiRIDQiDyFz'
+#
+#
+#     # Init live advance
+#     l = LiveAdvance(your_app_client_id, your_app_client_secret)
+#
+#     trained_profile_name = 'bayshore'
+#     trained_cmd = 'push'
+#     l.start(trained_profile_name)
+#
+# if __name__ =='__main__':
+#     main()
+#
+# # -----------------------------------------------------------

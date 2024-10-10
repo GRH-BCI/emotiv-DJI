@@ -4,10 +4,14 @@ from PyQt5.uic import loadUi
 import json
 from save_config import save_config
 from live_advance import LiveAdvance
+import threading
 
-your_app_client_id = 'qewGF4dAeJKLMRidukubPBQuGSxido5ZrVenjQYq'
-your_app_client_secret = '9GrDektKKWLde6baf8GtFyXIMMEJpItY6YxYx7qEarG7yRLoMycQvmwzkZakn7jHLtPIsRcez4pBQzZygTyL67Ri9JdtJaTPUFOrWWbNwbxhV5hAS3IOElewyJTftixe'
-trained_profile_name = 'testprof'
+your_app_client_id = 'JLuMZwsnMkvrEo5eGR7wwazyXRfjdBBg1KnGC5id'
+your_app_client_secret = 'f2tHNJAVA5O2eza6GkPX5DeZni8J7TW2tI3IuO6YFISdxGmGBtLLm2SvpMTz53TGLvPiZJMw45Mnljnjt1UCSc7r7FXvjcsUOGOB6DHJbg6GU06NtbLCqRiRIDQiDyFz'
+trained_profile_name = 'bayshore'
+trained_cmd = 'push'
+threshold = 50
+
 class WelcomeScreen(QtWidgets.QMainWindow):
     def __init__(self):
         super(WelcomeScreen, self).__init__()
@@ -45,7 +49,8 @@ class WelcomeScreen(QtWidgets.QMainWindow):
 
     def start_mapping(self):
         print('start_mapping')
-        self.l.start(trained_profile_name)
+        liveThread = threading.Thread(target=self.l.start, args=[trained_profile_name])
+        liveThread.start()
 
     def pause_mapping(self):
         print('pause mapping')
