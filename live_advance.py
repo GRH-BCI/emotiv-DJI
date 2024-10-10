@@ -1,6 +1,8 @@
 import cortex
 from cortex import Cortex
 from pynput.keyboard import Key, Controller
+import json
+
 kb = Controller()
 
 """
@@ -239,10 +241,21 @@ class LiveAdvance():
         """
         data = kwargs.get('data')
         print('mc data: {}'.format(data))
-        if data['action'] == trained_cmd and data['power'] >= threshold:
-            kb.press('w',0.1)  # key and duration in seconds
-
-
+        with open("config.json", "r") as config_file:
+            config = json.load(config_file)
+        keys = ['w','a','s','d']
+        push_key = keys[config["push"]]
+        pull_key = keys[config["pull"]]
+        left_key = keys[config["left"]]
+        right_key = keys[config["right"]]
+        if data['action'] == "push" and data['power'] >= threshold:
+            kb.press(push_key, 0.1)  # key and duration in seconds
+        elif data['action'] == "pull" and data['power'] >= threshold:
+            kb.press(pull_key, 0.1)  # key and duration in seconds
+        elif data['action'] == "left" and data['power'] >= threshold:
+            kb.press(left_key, 0.1)  # key and duration in seconds
+        elif data['action'] == "right" and data['power'] >= threshold:
+            kb.press(right_key, 0.1)  # key and duration in seconds
 
     def on_get_mc_active_action_done(self, *args, **kwargs):
         data = kwargs.get('data')
@@ -290,14 +303,14 @@ class LiveAdvance():
 # 
 # -----------------------------------------------------------
 #
-# def main():
-#
-#
-#
-#     # Init live advance
-#     l = LiveAdvance(your_app_client_id, your_app_client_secret)
-#
-#     l.start(trained_profile_name)
-#
-# main()
-# # -----------------------------------------------------------
+def main():
+
+
+
+    # Init live advance
+    l = LiveAdvance(your_app_client_id, your_app_client_secret)
+
+    l.start(trained_profile_name)
+
+main()
+# -----------------------------------------------------------
