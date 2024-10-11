@@ -4,7 +4,8 @@ from pynput.keyboard import Key, Controller
 import json
 kb = Controller()
 
-threshold = 50
+threshold = 50 # acceptance threshold for mapping keys
+
 class LiveAdvance():
     """
     A class to show mental command data at live mode of trained profile.
@@ -69,6 +70,9 @@ class LiveAdvance():
             self.c.set_wanted_headset(headsetId)
 
         self.c.open()
+
+    def stop(self):
+        self.c.close()
 
     def load_profile(self, profile_name):
         """
@@ -308,5 +312,5 @@ class LiveAdvance():
 #
 # if __name__ =='__main__':
 #     main()
-#
+
 # # -----------------------------------------------------------
