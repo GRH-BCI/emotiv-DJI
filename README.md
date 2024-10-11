@@ -1,34 +1,14 @@
-# Python Example
+# Emotiv DJI Controller
 
 ## Requirement
-- This example works with Python >= 3.7
+- This app works with Python >= 3.8
 - Install websocket client via  `pip install websocket-client`
-- Install python-dispatch via `pip install python-dispatch`
 
-## Before you start
 
-To run the existing example you will need to do a few things.
+## About the app
 
-1. You will need an EMOTIV headset.  You can purchase a headset in our [online
-   store](https://www.emotiv.com/)
-2. Next, [download and install](https://www.emotiv.com/developer/) the Cortex
-   service.  Please note that currently, the Cortex service is only available
-   for Windows and macOS.
-3. We have updated our Terms of Use, Privacy Policy and EULA to comply with
-   GDPR. Please login via the EMOTIV Launcher to read and accept our latest policies
-   in order to proceed using the following examples.
-4. Next, to get a client id and a client secret, you must connect to your
-   Emotiv account on
-   [emotiv.com](https://www.emotiv.com/my-account/cortex-apps/) and create a
-   Cortex app. If you don't have a EmotivID, you can [register
-   here](https://id.emotivcloud.com/eoidc/account/registration/).
-5. Then, if you have not already, you will need to login with your Emotiv id in
-   the EMOTIV Launcher.
-6. Finally, the first time you run these examples, you also need to authorize
-   them in the EMOTIV Launcher.
-
-This code is purely an example of how to work with Cortex.  We strongly
-recommend adjusting the code to your purposes.
+This app is based on Emotiv Cortex V2 library. live_advance.py is an altered version of the existing version in python examples folder of Emotiv CortexV2. 
+This app is used to map Emotiv Cortex commands generated through EMotivBCI app, to keyboard keypresses. the keyboard keypresses are further used to control a DJI robot through it's computer software. 
 
 ## Cortex Library
 - [`cortex.py`](./cortex.py) - the wrapper lib around EMOTIV Cortex API.
